@@ -5,12 +5,12 @@ import './Resume.css';
 const Resume = ({ speechEnabled }) => {
   const [showCV, setShowCV] = useState(false);
 
-  // Text-to-speech function for CV
-  const speakCV = () => {
-    if (!speechEnabled) return;
-    
-    window.speechSynthesis.cancel();
-    const cvText = `Deepak Singh's CV.
+  // Text-to-speech function for CV (commented out - not currently used)
+  // const speakCV = () => {
+  //   if (!speechEnabled) return;
+  //   
+  //   window.speechSynthesis.cancel();
+  //   const cvText = `Deepak Singh's CV.
     
     Contact: Email deepaks86509@gmail.com, Mobile +91-7889140393.
     LinkedIn: linkedin.com/in/deepaksingh9999

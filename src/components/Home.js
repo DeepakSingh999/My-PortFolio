@@ -2,7 +2,7 @@ import React from 'react';
 import './Home.css';
 
 const Home = ({ speechState }) => {
-  const { isSpeaking, currentWordIndex, speakingSection, speechTexts } = speechState || {};
+  const { isSpeaking, currentWordIndex, speakingSection } = speechState || {};
 
   const renderAnimatedText = (text, isHighlight = false) => {
     return text.split('').map((char, index) => (

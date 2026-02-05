@@ -31,7 +31,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
         speechTexts
       });
     }
-  }, [isSpeaking, currentWordIndex, speakingSection, onSpeechStateChange]);
+  }, [isSpeaking, currentWordIndex, speakingSection, speechTexts, onSpeechStateChange]);
 
   // Text-to-speech function with word tracking
   const speakText = (text, section) => {
@@ -72,7 +72,6 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
     }
 
     // Track word boundaries
-    let wordIndex = 0;
     const words = text.split(/\s+/);
     
     utterance.onboundary = (event) => {
@@ -168,13 +167,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
   };
 
   // Stop speech button handler
-  const handleStopSpeech = () => {
-    window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-    setCurrentWordIndex(-1);
-    setSpeakingSection(null);
-  };
-
+  const handleStois handled in useEffect cleanup
   const menuItems = [
     { id: 'home', label: 'HOME', icon: '🏠' },
     { id: 'about', label: 'ABOUT', icon: '👤' },
