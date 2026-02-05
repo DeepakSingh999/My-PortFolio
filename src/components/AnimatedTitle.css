@@ -1,0 +1,153 @@
+/* Animated Title Styles */
+.animated-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.title-text,
+.title-highlight {
+  display: inline-block;
+}
+
+.title-text {
+  color: var(--text-primary);
+  margin-right: 10px;
+}
+
+.title-highlight {
+  position: relative;
+}
+
+/* Individual letter animation */
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px) rotateX(-90deg);
+  animation: letterReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.highlight-letter {
+  background: linear-gradient(135deg, #f5a623, #ff6b6b, #f5a623);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: letterReveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+             gradientShift 3s ease infinite;
+}
+
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Animated underline */
+.title-underline {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #f5a623, transparent);
+  border-radius: 2px;
+  animation: underlineGrow 1s ease 0.8s forwards;
+}
+
+@keyframes underlineGrow {
+  to {
+    width: 100px;
+  }
+}
+
+/* Hover effects */
+.animated-title:hover .letter {
+  animation: letterBounce 0.4s ease;
+}
+
+.animated-title:hover .title-underline {
+  animation: underlinePulse 1s ease infinite;
+}
+
+@keyframes letterBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes underlinePulse {
+  0%, 100% { width: 100px; opacity: 1; }
+  50% { width: 120px; opacity: 0.8; }
+}
+
+/* Glowing effect on highlight */
+.title-highlight::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.2), transparent);
+  border-radius: 8px;
+  opacity: 0;
+  animation: glowPulse 2s ease infinite 1s;
+  z-index: -1;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* Speech Word Highlighting for Title */
+.animated-title .speech-word {
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.animated-title .speech-word.speaking-word {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.35), rgba(255, 107, 107, 0.35));
+  box-shadow: 0 0 20px rgba(245, 166, 35, 0.5), 0 0 40px rgba(245, 166, 35, 0.3);
+  animation: titleWordPulse 0.4s ease;
+}
+
+.animated-title .speech-word.speaking-word .letter {
+  text-shadow: 0 0 15px rgba(245, 166, 35, 0.8);
+}
+
+@keyframes titleWordPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .animated-title {
+    font-size: 2rem;
+  }
+  
+  .letter {
+    animation-duration: 0.4s;
+  }
+}

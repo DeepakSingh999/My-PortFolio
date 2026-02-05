@@ -1,0 +1,355 @@
+.about {
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  animation: fadeInUp 1s ease;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+  color: var(--text-primary);
+  transition: color 0.4s ease;
+}
+
+.highlight {
+  color: var(--accent-color);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.about-text p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  text-align: center;
+  transition: color 0.4s ease;
+}
+
+/* Speech Word Highlighting for About */
+.about-text .speech-word {
+  display: inline;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+.about-text .speech-word.speaking-word {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.3), rgba(255, 107, 107, 0.3));
+  color: var(--accent-color);
+  font-weight: 600;
+  animation: aboutWordPulse 0.4s ease;
+  box-shadow: 0 0 15px rgba(245, 166, 35, 0.4);
+}
+
+@keyframes aboutWordPulse {
+  0% {
+    transform: scale(1);
+    background: transparent;
+  }
+  50% {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.5), rgba(255, 107, 107, 0.5));
+  }
+  100% {
+    transform: scale(1);
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.3), rgba(255, 107, 107, 0.3));
+  }
+}
+
+.skills-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: var(--accent-color);
+  text-align: center;
+}
+
+/* Skills Section Title */
+.skills-section .skills-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+/* Skills Globe Container */
+.skills-globe-container {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Globe Wireframe - More Visible */
+.globe-wireframe {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 150, 255, 0.15) 0%, rgba(50, 100, 200, 0.05) 60%, transparent 80%);
+  border: 2px solid rgba(100, 150, 255, 0.35);
+  box-shadow: 
+    0 0 40px rgba(100, 150, 255, 0.2),
+    inset 0 0 60px rgba(100, 150, 255, 0.1);
+}
+
+.globe-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 150, 255, 0.1) 0%, transparent 70%);
+  animation: globePulse 4s ease-in-out infinite;
+}
+
+@keyframes globePulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.globe-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(100, 150, 255, 0.25);
+  border-radius: 50%;
+}
+
+.globe-circle-1 {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(100, 150, 255, 0.3);
+}
+
+.globe-circle-2 {
+  width: 70%;
+  height: 100%;
+  border-left: 2px solid rgba(100, 150, 255, 0.3);
+  border-right: 2px solid rgba(100, 150, 255, 0.3);
+  border-top: none;
+  border-bottom: none;
+}
+
+.globe-circle-3 {
+  width: 35%;
+  height: 100%;
+  border-left: 1px solid rgba(100, 150, 255, 0.2);
+  border-right: 1px solid rgba(100, 150, 255, 0.2);
+  border-top: none;
+  border-bottom: none;
+}
+
+.globe-horizontal {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  border-top: 1px solid rgba(100, 150, 255, 0.25);
+}
+
+.globe-h-1 {
+  top: 30%;
+  width: 85%;
+}
+
+.globe-h-2 {
+  top: 50%;
+  width: 100%;
+  border-top: 2px solid rgba(100, 150, 255, 0.3);
+}
+
+.globe-h-3 {
+  top: 70%;
+  width: 85%;
+}
+
+/* Skills Orbit */
+.skills-orbit-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotateGlobe 40s linear infinite;
+}
+
+@keyframes rotateGlobe {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.orbit-skill-item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  left: 50%;
+  top: 50%;
+  transform: 
+    rotate(calc(360deg / var(--total) * var(--i)))
+    translateX(200px)
+    rotate(calc(-360deg / var(--total) * var(--i)));
+  animation: counterRotateSkill 40s linear infinite;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@keyframes counterRotateSkill {
+  from {
+    transform: 
+      rotate(calc(360deg / var(--total) * var(--i)))
+      translateX(200px)
+      rotate(calc(-360deg / var(--total) * var(--i)));
+  }
+  to {
+    transform: 
+      rotate(calc(360deg / var(--total) * var(--i) + 360deg))
+      translateX(200px)
+      rotate(calc(-360deg / var(--total) * var(--i) - 360deg));
+  }
+}
+
+.skill-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-skill-item img {
+  width: 50px;
+  height: 50px;
+  filter: drop-shadow(0 0 8px rgba(100, 150, 255, 0.4));
+  transition: all 0.3s ease;
+  background: rgba(20, 30, 50, 0.9);
+  padding: 8px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+}
+
+.orbit-skill-item:hover img {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 15px var(--skill-color));
+  border-color: var(--skill-color);
+}
+
+/* Active/Selected Skill */
+.orbit-skill-item.active img {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 25px var(--skill-color)) drop-shadow(0 0 50px var(--skill-color));
+  border-color: var(--skill-color);
+  background: rgba(20, 30, 50, 1);
+  box-shadow: 
+    0 0 20px var(--skill-color),
+    0 0 40px var(--skill-color),
+    inset 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.skill-pulse {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  border: 2px solid var(--skill-color);
+  animation: skillPulse 1.5s ease-out infinite;
+}
+
+@keyframes skillPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.orbit-skill-name {
+  font-size: 0.75rem;
+  color: #b0b0b0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.orbit-skill-item:hover .orbit-skill-name {
+  color: var(--skill-color);
+  opacity: 1;
+}
+
+.orbit-skill-item.active .orbit-skill-name {
+  color: var(--skill-color);
+  opacity: 1;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--skill-color);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .skills-globe-container {
+    width: 320px;
+    height: 320px;
+  }
+  
+  .globe-wireframe {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .orbit-skill-item {
+    transform: 
+      rotate(calc(360deg / var(--total) * var(--i)))
+      translateX(140px)
+      rotate(calc(-360deg / var(--total) * var(--i)));
+  }
+  
+  @keyframes counterRotateSkill {
+    from {
+      transform: 
+        rotate(calc(360deg / var(--total) * var(--i)))
+        translateX(140px)
+        rotate(calc(-360deg / var(--total) * var(--i)));
+    }
+    to {
+      transform: 
+        rotate(calc(360deg / var(--total) * var(--i) + 360deg))
+        translateX(140px)
+        rotate(calc(-360deg / var(--total) * var(--i) - 360deg));
+    }
+  }
+  
+  .orbit-skill-item img {
+    width: 38px;
+    height: 38px;
+    padding: 6px;
+  }
+  
+  .orbit-skill-name {
+    font-size: 0.65rem;
+  }
+}
