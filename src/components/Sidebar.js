@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './Sidebar.css';
 
 const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStateChange, speechEnabled, onSpeechToggle }) => {
@@ -9,8 +9,8 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
   const [speakingSection, setSpeakingSection] = useState(null);
   const speechRef = useRef(null);
 
-  // Speech texts for each section
-  const speechTexts = {
+  // Speech texts for each section - memoized to prevent recreation on every render
+  const speechTexts = useMemo(() => ({
     home: "Hi, I am Deepak Singh. Cloud Computing student with hands-on experience in AWS and containerized systems, building reliable, scalable infrastructure through real-world projects, automation, and strong system fundamentals.",
     about: "About Me. I'm a Cloud Computing student with hands-on experience in AWS and containerized environments, focused on designing, deploying, and managing scalable, efficient cloud infrastructure using modern DevOps practices. I learn by building and fixing real systems, prioritizing strong system fundamentals to adapt quickly to new technologies and real-world challenges.",
     skills: "Skills",
@@ -20,7 +20,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
     contact: "Contact Me",
     resume: "My Resume. Education: I am currently pursuing Bachelor of Technology from Lovely Professional University, Jalandhar, Punjab since 2023, focusing on Computer Science and Engineering with Cloud Computing and DevOps. Before this, I completed my Higher Secondary education from High School Jaynagar, Madhubani, Bihar from 2020 to 2022. Experience: I am currently working as a Web Development Intern at Startup Inc since 2024, where I develop landing pages and contribute to UI/UX improvements. I also work as a Frontend Developer at Tech Company since 2023, building responsive web applications using React.js and modern CSS frameworks.",
     hire: "Hire Me"
-  };
+  }), []);
 
   // Notify parent of speech state changes
   useEffect(() => {
@@ -45,28 +45,28 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
     utterance.rate = 0.85; // Slower rate for smoother, more natural speech
     utterance.pitch = 1.0; // Natural pitch for better clarity
     utterance.volume = 0.9; // Slightly lower volume for smoother sound
-    
+
     // Try to use a smooth, high-quality English voice
     const voices = window.speechSynthesis.getVoices();
     // Prefer high-quality voices like Google, Microsoft, or Apple's enhanced voices
-    const smoothVoice = voices.find(voice => 
+    const smoothVoice = voices.find(voice =>
       voice.lang.includes('en') && (
         voice.name.includes('Google') ||
         voice.name.includes('Enhanced') ||
         voice.name.includes('Premium') ||
         voice.name.includes('Natural')
       )
-    ) || voices.find(voice => 
+    ) || voices.find(voice =>
       voice.lang.includes('en') && (
-        voice.name.includes('Male') || 
-        voice.name.includes('David') || 
+        voice.name.includes('Male') ||
+        voice.name.includes('David') ||
         voice.name.includes('Daniel') ||
         voice.name.includes('Alex')
       )
-    ) || voices.find(voice => 
+    ) || voices.find(voice =>
       voice.lang.includes('en-US') || voice.lang.includes('en-GB')
     ) || voices.find(voice => voice.lang.includes('en'));
-    
+
     if (smoothVoice) {
       utterance.voice = smoothVoice;
       console.log('Using voice:', smoothVoice.name);
@@ -74,7 +74,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
 
     // Track word boundaries
     const words = text.split(/\s+/);
-    
+
     utterance.onboundary = (event) => {
       if (event.name === 'word') {
         // Calculate word index from character index
@@ -95,13 +95,13 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
       setSpeakingSection(section);
       setCurrentWordIndex(0);
     };
-    
+
     utterance.onend = () => {
       setIsSpeaking(false);
       setCurrentWordIndex(-1);
       setSpeakingSection(null);
     };
-    
+
     utterance.onerror = () => {
       setIsSpeaking(false);
       setCurrentWordIndex(-1);
@@ -134,16 +134,16 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
+
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
+
     oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
     oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.1);
-    
+
     gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
-    
+
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.15);
   };
@@ -151,7 +151,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
   const handleNavClick = (itemId) => {
     playClickSound();
     setActiveSection(itemId);
-    
+
     // Speak text only if speech is enabled
     if (speechEnabled && speechTexts[itemId]) {
       // Small delay to let the click sound finish
@@ -183,7 +183,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
   return (
     <aside className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
       {/* Toggle Button */}
-      <button 
+      <button
         className="sidebar-toggle"
         onClick={() => setIsExpanded(!isExpanded)}
         aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
@@ -192,12 +192,12 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
       </button>
 
       <div className="profile-wrapper">
-        <div 
-          className={`profile-image ${isImageZoomed ? 'zoomed' : ''}`} 
+        <div
+          className={`profile-image ${isImageZoomed ? 'zoomed' : ''}`}
           onClick={() => setIsImageZoomed(!isImageZoomed)}
         >
-          <img 
-            src="/images/profile.png" 
+          <img
+            src="/images/profile.png"
             alt="Deepak Singh"
           />
         </div>
@@ -227,9 +227,9 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
           </button>
         ))}
       </nav>
-      
+
       {/* Speech ON/OFF Toggle */}
-      <button 
+      <button
         className={`speech-toggle-btn ${speechEnabled ? 'enabled' : 'disabled'}`}
         onClick={onSpeechToggle}
         title={speechEnabled ? 'Voice ON - Click to turn OFF' : 'Voice OFF - Click to turn ON'}
@@ -239,7 +239,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
           <span className="toggle-slider"></span>
         </span>
       </button>
-      
+
       <button className="hire-btn" onClick={() => {
         playClickSound();
         setActiveSection('contact');
