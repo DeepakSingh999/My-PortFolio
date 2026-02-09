@@ -5,7 +5,8 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Resume from './components/Resume';
 import Portfolio from './components/Portfolio';
-import CertificateAchievementHub from './components/CertificateAchievementHub';
+import Certificate from './components/Certificate';
+import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import FloatingBubbles from './components/FloatingBubbles';
 import ChatWidget from './components/ChatWidget';
@@ -34,7 +35,7 @@ function App() {
 
   // Scroll spy - detect which section is in view
   useEffect(() => {
-    const sections = ['home', 'about', 'skills', 'projects', 'certificates', 'contact', 'resume'];
+    const sections = ['home', 'about', 'skills', 'projects', 'certificates', 'achievements', 'contact', 'resume'];
     
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight / 3;
@@ -102,7 +103,7 @@ function App() {
 
     const handleMouseOut = (e) => {
       if (e.target.closest('a, button, .clickable, .nav-item, .social-link, .cert-card, .achievement-card, .project-card')) {
-        setIsHovering(false);
+        setIsHovering(true);
       }
     };
 
@@ -127,7 +128,7 @@ function App() {
       {/* Theme Toggle */}
       <ThemeToggle isDark={isDarkMode} toggleTheme={toggleTheme} />
       
-      {/* Custom Diamond Cursor */}}}
+      {/* Custom Diamond Cursor */}
       <div 
         className={`cursor-diamond ${isClicking ? 'clicking' : ''} ${isHovering ? 'hovering' : ''}`}
         style={{ left: cursorPosition.x, top: cursorPosition.y }}
@@ -173,7 +174,10 @@ function App() {
           <Portfolio speechEnabled={speechEnabled} />
         </section>
         <section id="certificates" className="section">
-          <CertificateAchievementHub speechEnabled={speechEnabled} />
+          <Certificate speechEnabled={speechEnabled} />
+        </section>
+        <section id="achievements" className="section">
+          <Achievements speechEnabled={speechEnabled} />
         </section>
         <section id="contact" className="section">
           <Contact speechEnabled={speechEnabled} />

@@ -21,25 +21,25 @@ const Contact = ({ speechEnabled }) => {
     utterance.rate = 0.9;
     utterance.pitch = 0.9;
     utterance.volume = 1;
-    
+
     const voices = window.speechSynthesis.getVoices();
-    const maleVoice = voices.find(voice => 
+    const maleVoice = voices.find(voice =>
       voice.lang.includes('en') && (
-        voice.name.includes('Male') || 
-        voice.name.includes('David') || 
-        voice.name.includes('James') || 
+        voice.name.includes('Male') ||
+        voice.name.includes('David') ||
+        voice.name.includes('James') ||
         voice.name.includes('Daniel') ||
         voice.name.includes('Alex') ||
         voice.name.includes('Fred')
       )
-    ) || voices.find(voice => 
+    ) || voices.find(voice =>
       voice.lang.includes('en') && !voice.name.includes('Samantha') && !voice.name.includes('Victoria') && !voice.name.includes('Karen')
     ) || voices.find(voice => voice.lang.includes('en'));
-    
+
     if (maleVoice) {
       utterance.voice = maleVoice;
     }
-    
+
     window.speechSynthesis.speak(utterance);
   };
 
@@ -61,17 +61,24 @@ const Contact = ({ speechEnabled }) => {
       form.current,
       'XXXXXXXXXXXXXX'    // Replace with your EmailJS Public Key
     )
-    .then((result) => {
-      console.log('Email sent:', result.text);
-      alert('✅ Thank you for your message! I will get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setSending(false);
-    })
-    .catch((error) => {
-      console.error('Email error:', error.text);
-      alert('❌ Failed to send message. Please try again or email me directly.');
-      setSending(false);
-    });
+      .then((result) => {
+        console.log('Email sent:', result.text);
+        alert('✅ Thank you for your message! I will get back to you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setSending(false);
+      })
+      .catch((error) => {
+        console.error('Email error:', error.text);
+        alert('❌ Failed to send message. Please try again or email me directly.');
+        setSending(false);
+      });
+  };
+
+  const handleWhatsApp = () => {
+    const { name, email, subject, message } = formData;
+    const whatsappMessage = `Hi Deepak!%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Subject:* ${encodeURIComponent(subject)}%0A%0A*Message:*%0A${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/917889140393?text=${whatsappMessage}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -141,9 +148,14 @@ const Contact = ({ speechEnabled }) => {
             onChange={handleChange}
             required
           ></textarea>
-          <button type="submit" className="submit-btn" disabled={sending}>
-            {sending ? 'Sending...' : 'Send Message'}
-          </button>
+          <div className="form-buttons">
+            <button type="submit" className="submit-btn" disabled={sending}>
+              {sending ? 'Sending...' : '📧 Send via Email'}
+            </button>
+            <button type="button" className="whatsapp-btn" onClick={handleWhatsApp}>
+              💬 Send via WhatsApp
+            </button>
+          </div>
         </form>
       </div>
     </section>

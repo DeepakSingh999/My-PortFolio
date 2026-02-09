@@ -1,29 +1,9 @@
 .achievements-page {
   width: 100%;
   max-width: 1100px;
-  padding: 20px;
+  padding: 40px;
+  margin: 0 auto;
   animation: fadeInUp 0.6s ease;
-}
-
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  margin-bottom: 30px;
-  transition: all 0.3s ease;
-}
-
-.back-btn:hover {
-  background: rgba(245, 166, 35, 0.1);
-  border-color: #f5a623;
-  color: #f5a623;
 }
 
 .achievements-page .section-title {
@@ -130,6 +110,36 @@
   font-size: 0.95rem;
   line-height: 1.6;
   margin-bottom: 15px;
+}
+
+.achievement-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-item .stat-value {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.stat-item .stat-label {
+  color: #888;
+  font-size: 0.75rem;
+  text-transform: lowercase;
 }
 
 .achievement-date {

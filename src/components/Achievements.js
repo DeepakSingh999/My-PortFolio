@@ -1,7 +1,30 @@
 import React from 'react';
 import './Achievements.css';
 
-const Achievements = ({ onBack }) => {
+const Achievements = ({ onBack, speechEnabled }) => {
+  const speakAchievement = (achievement) => {
+    if (!speechEnabled) return;
+    
+    window.speechSynthesis.cancel();
+    const text = `${achievement.title}. ${achievement.description}. Achievement date: ${achievement.date}.`;
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.9;
+    utterance.pitch = 0.9;
+    utterance.volume = 1;
+    
+    const voices = window.speechSynthesis.getVoices();
+    const maleVoice = voices.find(voice => 
+      voice.lang.includes('en') && (
+        voice.name.includes('Male') || 
+        voice.name.includes('David') || 
+        voice.name.includes('James')
+      )
+    ) || voices.find(voice => voice.lang.includes('en'));
+    
+    if (maleVoice) utterance.voice = maleVoice;
+    window.speechSynthesis.speak(utterance);
+  };
   const achievements = [
     {
       id: 1,
@@ -11,6 +34,7 @@ const Achievements = ({ onBack }) => {
       date: '2025',
       color: '#00ea64',
       profileUrl: 'https://www.hackerrank.com/profile/deepaks86509',
+      stats: { badges: '15+', stars: '5⭐', rank: 'Gold' }
     },
     {
       id: 2,
@@ -20,6 +44,7 @@ const Achievements = ({ onBack }) => {
       date: '2025',
       color: '#ffa116',
       profileUrl: 'https://leetcode.com/u/Raymonds_Hacker/',
+      stats: { solved: '100+', contests: '10+', rank: 'Top 20%' }
     },
     {
       id: 3,
@@ -29,18 +54,12 @@ const Achievements = ({ onBack }) => {
       date: '2025',
       color: '#2f8d46',
       profileUrl: 'https://www.geeksforgeeks.org/profile/singhdeepak90?tab=activity',
+      stats: { score: '500+', articles: '5+', streak: '30 days' }
     },
   ];
 
   return (
     <section className="achievements-page">
-      <button className="back-btn" onClick={onBack}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
-        Back
-      </button>
-      
       <h2 className="section-title">My <span className="highlight">Achievements</span></h2>
       <p className="section-subtitle">Milestones, certifications, and accomplishments</p>
       
@@ -50,7 +69,12 @@ const Achievements = ({ onBack }) => {
             key={achievement.id} 
             className="achievement-card" 
             style={{'--accent-color': achievement.color}}
-            onClick={() => achievement.profileUrl && window.open(achievement.profileUrl, '_blank')}
+            onClick={() => {
+              speakAchievement(achievement);
+              if (achievement.profileUrl) {
+                window.open(achievement.profileUrl, '_blank');
+              }
+            }}
           >
             <div className="achievement-icon">
               <img src={achievement.image} alt={achievement.title} />
@@ -58,6 +82,18 @@ const Achievements = ({ onBack }) => {
             <div className="achievement-content">
               <h3>{achievement.title}</h3>
               <p>{achievement.description}</p>
+              
+              {achievement.stats && (
+                <div className="achievement-stats">
+                  {Object.entries(achievement.stats).map(([key, value]) => (
+                    <div key={key} className="stat-item">
+                      <span className="stat-value">{value}</span>
+                      <span className="stat-label">{key}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
               <span className="achievement-date">{achievement.date}</span>
               {achievement.profileUrl && (
                 <button className="profile-link-btn">

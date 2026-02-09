@@ -11,72 +11,72 @@ const Resume = ({ speechEnabled }) => {
   //   
   //   window.speechSynthesis.cancel();
   //   const cvText = `Deepak Singh's CV.
-    
-    Contact: Email deepaks86509@gmail.com, Mobile +91-7889140393.
-    LinkedIn: linkedin.com/in/deepaksingh9999
-    GitHub: github.com/DeepakSingh999
-    
-    Skills:
-    Languages: Python, Java, C and C++.
-    Frameworks: Tableau, HTML, CSS, React, Bootstrap.
-    Tools and Platforms: Git, GitHub, MySQL, MongoDB.
-    Soft Skills: Problem-Solving, Team Work, Leadership.
-    
-    Projects:
-    
-    First Project: Restaurant Management System using Core Java, developed from February 2025 to March 2025.
-    Developed a Restaurant Management System using Core Java for streamlined restaurant operations.
-    Implemented key features such as order management, menu handling, and billing using Object Oriented Programming concepts.
-    Integrated MySQL database for secure data storage and efficient record management.
-    
-    Second Project: Mental Health Trends Analyzer, developed from February 2025 to April 2025.
-    Engineered a Python-based analysis tool using Pandas and NumPy to process and clean a large-scale mental illness dataset from Kaggle.
-    Built an interactive web application with Streamlit to visualize trends and correlations in mental health data.
-    Created various plots with Matplotlib, such as demographic distributions and symptom frequency.
-    
-    Third Project: Airlines Reservation System using Core Java, developed from March 2025 to April 2025.
-    Developed an Airlines Reservation System using Core Java for efficient flight booking operations.
-    Implemented features such as ticket booking, cancellation, and passenger management using Object Oriented Programming concepts.
-    
-    Certificates:
-    Data Structure And Algorithms from Apna College, completed in September 2024.
-    Completed Deloitte Technology Job Simulation through Forage in August 2025, enhancing skills in coding and development.
-    
-    Achievements:
-    Solved 250+ Data Structures and Algorithms problems on GeeksforGeeks.
-    Completed 100+ coding challenges on LeetCode.
-    Regularly participated in weekly coding contests, improving competitive programming skills.
-    
-    Education:
-    Currently pursuing Bachelor of Technology in Computer Science and Engineering from Lovely Professional University.
-    Completed Intermediate from HBJC College Khajuli with 79 percent.
-    Completed Matriculation from +2 High School with 84 percent.`;
-    
-    const utterance = new SpeechSynthesisUtterance(cvText);
-    utterance.rate = 0.9;
-    utterance.pitch = 0.9;
-    utterance.volume = 1;
-    
-    const voices = window.speechSynthesis.getVoices();
-    const maleVoice = voices.find(voice => 
-      voice.lang.includes('en') && (
-        voice.name.includes('Male') || 
-        voice.name.includes('David') || 
-        voice.name.includes('James') || 
-        voice.name.includes('Daniel') ||
-        voice.name.includes('Alex') ||
-        voice.name.includes('Fred')
-      )
-    ) || voices.find(voice => 
-      voice.lang.includes('en') && !voice.name.includes('Samantha') && !voice.name.includes('Victoria') && !voice.name.includes('Karen')
-    ) || voices.find(voice => voice.lang.includes('en'));
-    
-    if (maleVoice) {
-      utterance.voice = maleVoice;
-    }
-    
-    window.speechSynthesis.speak(utterance);
-  };
+  //   
+  //   Contact: Email deepaks86509@gmail.com, Mobile +91-7889140393.
+  //   LinkedIn: linkedin.com/in/deepaksingh9999
+  //   GitHub: github.com/DeepakSingh999
+  //   
+  //   Skills:
+  //   Languages: Python, Java, C and C++.
+  //   Frameworks: Tableau, HTML, CSS, React, Bootstrap.
+  //   Tools and Platforms: Git, GitHub, MySQL, MongoDB.
+  //   Soft Skills: Problem-Solving, Team Work, Leadership.
+  //   
+  //   Projects:
+  //   
+  //   First Project: Restaurant Management System using Core Java, developed from February 2025 to March 2025.
+  //   Developed a Restaurant Management System using Core Java for streamlined restaurant operations.
+  //   Implemented key features such as order management, menu handling, and billing using Object Oriented Programming concepts.
+  //   Integrated MySQL database for secure data storage and efficient record management.
+  //   
+  //   Second Project: Mental Health Trends Analyzer, developed from February 2025 to April 2025.
+  //   Engineered a Python-based analysis tool using Pandas and NumPy to process and clean a large-scale mental illness dataset from Kaggle.
+  //   Built an interactive web application with Streamlit to visualize trends and correlations in mental health data.
+  //   Created various plots with Matplotlib, such as demographic distributions and symptom frequency.
+  //   
+  //   Third Project: Airlines Reservation System using Core Java, developed from March 2025 to April 2025.
+  //   Developed an Airlines Reservation System using Core Java for efficient flight booking operations.
+  //   Implemented features such as ticket booking, cancellation, and passenger management using Object Oriented Programming concepts.
+  //   
+  //   Certificates:
+  //   Data Structure And Algorithms from Apna College, completed in September 2024.
+  //   Completed Deloitte Technology Job Simulation through Forage in August 2025, enhancing skills in coding and development.
+  //   
+  //   Achievements:
+  //   Solved 250+ Data Structures and Algorithms problems on GeeksforGeeks.
+  //   Completed 100+ coding challenges on LeetCode.
+  //   Regularly participated in weekly coding contests, improving competitive programming skills.
+  //   
+  //   Education:
+  //   Currently pursuing Bachelor of Technology in Computer Science and Engineering from Lovely Professional University.
+  //   Completed Intermediate from HBJC College Khajuli with 79 percent.
+  //   Completed Matriculation from +2 High School with 84 percent.`;
+  //   
+  //   const utterance = new SpeechSynthesisUtterance(cvText);
+  //   utterance.rate = 0.9;
+  //   utterance.pitch = 0.9;
+  //   utterance.volume = 1;
+  //   
+  //   const voices = window.speechSynthesis.getVoices();
+  //   const maleVoice = voices.find(voice => 
+  //     voice.lang.includes('en') && (
+  //       voice.name.includes('Male') || 
+  //       voice.name.includes('David') || 
+  //       voice.name.includes('James') || 
+  //       voice.name.includes('Daniel') ||
+  //       voice.name.includes('Alex') ||
+  //       voice.name.includes('Fred')
+  //     )
+  //   ) || voices.find(voice => 
+  //     voice.lang.includes('en') && !voice.name.includes('Samantha') && !voice.name.includes('Victoria') && !voice.name.includes('Karen')
+  //   ) || voices.find(voice => voice.lang.includes('en'));
+  //   
+  //   if (maleVoice) {
+  //     utterance.voice = maleVoice;
+  //   }
+  //   
+  //   window.speechSynthesis.speak(utterance);
+  // };
 
   const handleViewCV = () => {
     setShowCV(true);
@@ -159,14 +159,14 @@ const Resume = ({ speechEnabled }) => {
             </div>
             <div className="cv-modal-body">
               <iframe 
-                src="/cv/Deepak_Singh_CV.pdf" 
+                src="/cv/Placement_CV_new.pdf" 
                 title="Deepak Singh CV"
                 className="cv-iframe"
               />
             </div>
             <div className="cv-modal-footer">
               <a 
-                href="/cv/Deepak_Singh_CV.pdf" 
+                href="/cv/Placement_CV_new.pdf" 
                 download="Deepak_Singh_CV.pdf"
                 className="cv-download-btn"
               >

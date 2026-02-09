@@ -16,6 +16,7 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
     skills: "Skills",
     projects: "Projects",
     certificates: "Certificates",
+    achievements: "Achievements",
     contact: "Contact Me",
     resume: "My Resume. Education: I am currently pursuing Bachelor of Technology from Lovely Professional University, Jalandhar, Punjab since 2023, focusing on Computer Science and Engineering with Cloud Computing and DevOps. Before this, I completed my Higher Secondary education from High School Jaynagar, Madhubani, Bihar from 2020 to 2022. Experience: I am currently working as a Web Development Intern at Startup Inc since 2024, where I develop landing pages and contribute to UI/UX improvements. I also work as a Frontend Developer at Tech Company since 2023, building responsive web applications using React.js and modern CSS frameworks.",
     hire: "Hire Me"
@@ -167,13 +168,14 @@ const Sidebar = ({ activeSection, setActiveSection, onExpandChange, onSpeechStat
   };
 
   // Stop speech button handler
-  const handleStois handled in useEffect cleanup
+  // This is handled in useEffect cleanup
   const menuItems = [
     { id: 'home', label: 'HOME', icon: '🏠' },
     { id: 'about', label: 'ABOUT', icon: '👤' },
     { id: 'skills', label: 'SKILLS', icon: '⚡' },
     { id: 'projects', label: 'PROJECTS', icon: '💼' },
-    { id: 'certificates', label: 'CERTIFICATES', icon: '🏆' },
+    { id: 'certificates', label: 'CERTIFICATES', icon: '📜' },
+    { id: 'achievements', label: 'ACHIEVEMENTS', icon: '🏆' },
     { id: 'contact', label: 'CONTACT ME', icon: '✉️' },
     { id: 'resume', label: 'RESUME', icon: '📄' },
   ];

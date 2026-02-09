@@ -140,22 +140,41 @@
   min-height: 120px;
 }
 
-.submit-btn {
-  background: linear-gradient(90deg, #f5a623, #ff8c00);
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.submit-btn,
+.whatsapp-btn {
   border: none;
-  color: #0a0a1a;
-  padding: 15px 40px;
+  padding: 15px 30px;
   border-radius: 25px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  align-self: flex-start;
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #f5a623, #ff8c00);
+  color: #0a0a1a;
 }
 
 .submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(245, 166, 35, 0.3);
+}
+
+.whatsapp-btn {
+  background: linear-gradient(90deg, #25D366, #128C7E);
+  color: #fff;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
 }
 
 @keyframes fadeInUp {

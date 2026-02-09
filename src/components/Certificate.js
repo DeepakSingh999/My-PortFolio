@@ -1,8 +1,32 @@
 import React, { useState } from 'react';
 import './Certificate.css';
 
-const Certificate = ({ onBack }) => {
+const Certificate = ({ onBack, speechEnabled }) => {
   const [selectedCert, setSelectedCert] = useState(null);
+
+  const speakCertificate = (cert) => {
+    if (!speechEnabled) return;
+    
+    window.speechSynthesis.cancel();
+    const text = `${cert.title}. This certificate was issued by ${cert.issuer}, mentored by ${cert.mentor}. Completed in ${cert.date}. Credential ID: ${cert.credentialId}.`;
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.9;
+    utterance.pitch = 0.9;
+    utterance.volume = 1;
+    
+    const voices = window.speechSynthesis.getVoices();
+    const maleVoice = voices.find(voice => 
+      voice.lang.includes('en') && (
+        voice.name.includes('Male') || 
+        voice.name.includes('David') || 
+        voice.name.includes('James')
+      )
+    ) || voices.find(voice => voice.lang.includes('en'));
+    
+    if (maleVoice) utterance.voice = maleVoice;
+    window.speechSynthesis.speak(utterance);
+  };
 
   const certificates = [
     {
@@ -60,7 +84,15 @@ const Certificate = ({ onBack }) => {
       
       <div className="certificate-grid">
         {certificates.map((cert) => (
-          <div key={cert.id} className="cert-card" style={{'--accent-color': cert.color}}>
+          <div 
+            key={cert.id} 
+            className="cert-card" 
+            style={{'--accent-color': cert.color}}
+            onClick={() => {
+              speakCertificate(cert);
+              openModal(cert);
+            }}
+          >
             <div className="cert-card-header">
               <div className="cert-icon-wrapper">
                 <img src={cert.image} alt={cert.title} />

@@ -352,6 +352,10 @@ a, button, .clickable {
   animation: blinkRotate 0.5s ease-out forwards;
 }
 
+#achievements.section-visible > * {
+  animation: blinkSlideLeft 0.5s ease-out forwards;
+}
+
 #contact.section-visible > * {
   animation: blinkSlideBottom 0.5s ease-out forwards;
 }
