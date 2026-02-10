@@ -159,14 +159,14 @@ const Resume = ({ speechEnabled }) => {
             </div>
             <div className="cv-modal-body">
               <iframe 
-                src="/cv/Placement_CV_new.pdf" 
+                src="/cv/Deepak_Singh_CV.pdf" 
                 title="Deepak Singh CV"
                 className="cv-iframe"
               />
             </div>
             <div className="cv-modal-footer">
               <a 
-                href="/cv/Placement_CV_new.pdf" 
+                href="/cv/Deepak_Singh_CV.pdf" 
                 download="Deepak_Singh_CV.pdf"
                 className="cv-download-btn"
               >
